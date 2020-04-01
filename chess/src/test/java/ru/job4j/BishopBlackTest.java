@@ -1,5 +1,6 @@
 package ru.job4j;
 
+import org.junit.Assert;
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
@@ -32,10 +33,12 @@ public class BishopBlackTest {
     }
 
     @Test
-    public void wayNotDiagonal() {
+    public void wayNotDiagonal() throws IllegalStateException {
         Figure bishopBlack = new BishopBlack(Cell.C1);
-        Cell[] expected = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
-        Cell[] result = bishopBlack.way(Cell.C1, Cell.H5);
-        assertThat(result, is(expected));
+        try {
+            bishopBlack.way(Cell.C1, Cell.H5);
+        } catch (IllegalStateException thrown) {
+            Assert.assertEquals("Could not way by diagonal from C1 to H5", thrown.getMessage());
+        }
     }
 }
