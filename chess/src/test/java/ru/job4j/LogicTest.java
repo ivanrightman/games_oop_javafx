@@ -13,12 +13,26 @@ import static org.hamcrest.Matchers.is;
 public class LogicTest {
 
     @Test
-    public void bishopMoveTest() {
+    public void bishopMoveNoObstaclesOnWay() {
+        Logic logic = new Logic();
+        Figure obstacle = new PawnBlack(Cell.D3);
+        Figure bishop = new BishopBlack(Cell.C1);
+        logic.add(obstacle);
+        logic.add(bishop);
+        boolean expect = true;
+        boolean result = logic.move(Cell.C1, Cell.G5);
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void bishopMoveWithObstacleOnWay() {
         Logic logic = new Logic();
         Figure obstacle = new PawnBlack(Cell.D2);
         Figure bishop = new BishopBlack(Cell.C1);
         logic.add(obstacle);
         logic.add(bishop);
-
+        boolean expect = false;
+        boolean result = logic.move(Cell.C1, Cell.G5);
+        assertThat(result, is(expect));
     }
 }
