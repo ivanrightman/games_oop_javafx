@@ -32,6 +32,7 @@ public class Logic {
                     if (this.figures[n] != null) {
                         if (steps[n].equals(this.figures[n].position())) {
                             noObstacles = false;
+                            break;
                          }
                     }
                 }
